@@ -32,7 +32,10 @@ body, html {
 	box-sizing: border-box;
 	transition: all .4s ease;
 }
-
+#chatBox {
+	max-height: 88%;
+	overflow-y: auto;
+}
 .wrapper {
 	max-width: 1000px;
 	margin-right: auto;
@@ -179,7 +182,14 @@ body, html {
 .profile-right {
 	position: relative;
 }
-
+.message-block{
+	max-width: 50%;
+	width: fit-content;
+	background-color: #fff;
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px;
+}
 .message-form {
 	position: absolute;
 	bottom: 0;
@@ -243,4 +253,12 @@ body, html {
 
 .buddy {
 	background-color: #d7d7d7;
+}
+.error-message {
+	color: #b00020;
+	background-color: #fbe9e7;
+	padding: 10px;
+	border-left: 4px solid #d32f2f;
+	margin-bottom: 15px;
+	border-radius: 4px;
 }

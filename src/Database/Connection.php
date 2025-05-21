@@ -28,3 +28,4 @@ class Connection
 		return static::$instance;
 	}
 }
+

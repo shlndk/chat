@@ -1,7 +1,7 @@
 <?php
 
 $host = 'MySQL-8.2';
-$dbname = 'forum';
+$dbname = 'chat';
 $username = 'root';
 $password = '';
 return [

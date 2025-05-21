@@ -31,10 +31,11 @@ class Kernel
 
 		$routeInfo = $dispatcher->dispatch(
 			$request->getMethod(),
-			$request->getUri(),
+			parse_url($request->getUri(), PHP_URL_PATH),
 		);
 
 		[$status, [$controller, $method], $vars] = $routeInfo;
+
 
 		$controller = new $controller;
 
@@ -42,6 +43,6 @@ class Kernel
 			$controller->setRequest($request);
 		}
 
-		return call_user_func_array([$controller, $method], $vars);
+		return call_user_func_array([$controller, $method], array_merge([$request], $vars));
 	}
 }

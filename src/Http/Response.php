@@ -16,4 +16,10 @@ class Response
 	{
 		echo $this->content;
 	}
+	public function redirect(string $url, int $status = 302): void
+	{
+		http_response_code($status);
+		header("Location: $url");
+		exit;
+	}
 }

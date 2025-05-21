@@ -2,30 +2,93 @@
 
 namespace App\Controllers;
 
-use App\Models\Book;
+use App\Models\Auth;
 use PixelFix\Framework\Controllers\AbstractController;
+use PixelFix\Framework\Database\Connection;
+use PixelFix\Framework\Http\Request;
 use PixelFix\Framework\Http\Response;
+use App\Models\User;
 
 class AuthController extends AbstractController
 {
-	public function register(): Response
+	private $user;
+	public function __construct()
 	{
-		return $this->render('register.html');
+		parent::__construct();
+		$this->user = new User();
 	}
 
-	public function create(): Response
+	public function registerForm(): Response
 	{
-		return $this->render('create-book.html.twig');
+		return $this->render('register.php');
+	}
+	public function loginForm(){
+		return $this->render('login.php');
+	}
+	public function register(Request $request): Response
+	{
+
+		$rules = [
+			'username' => 'required',
+			'email'    => 'required|email|unique:users',
+			'password' => 'required|min:6',
+		];
+
+		$errors = $request->validate($_POST, $rules);
+
+
+		if (empty($errors)) {
+
+			$username = $_POST['username'];
+			$email = $_POST['email'];
+			$passwordHash = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+			$result = $this->user->register($username, $email, $passwordHash);
+
+			if ($result) {
+				header('Location: /login');
+				exit;
+			} else {
+				return $this->render('register.php', ['errors' => 'Registration failed.']);
+			}
+
+		} else {
+			return $this->render('register.php', ['errors' => $errors]);
+		}
+
 	}
 
-	public function store(): void
-	{
-		$book = new Book();
-		$book->setTitle($this->request->getPostParams('title'));
-		$book->setBody($this->request->getPostParams('body'));
 
-		$book->save();
+	public function login(){
 
-		dd($book);
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+
+		$result = $this->user->login($email, $password);
+
+		if ($result) {
+			header('Location: /');
+			exit;
+
+		} else {
+			return $this->render('login.php', ['errors' => 'Invalid email or password.']);
+		}
 	}
+	public function logout()
+	{
+		if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+			$result = $this->user->logout();
+
+			header('Location: /login');
+			exit;
+		}else{
+			http_response_code(405);
+		}
+
+
+	}
+
+
+
 }

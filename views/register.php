@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Chat - регистрация</title>
-	<link rel="stylesheet" href="/assets/style.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-</head>
+<?php
+require BASE_PATH . '/views/layout/header.php';
+
+
+if (!empty($errors)): ?>
+	<?php foreach ($errors as $fieldErrors): ?>
+		<?php foreach ($fieldErrors as $error): ?>
+			<div class="error-message"><?= htmlspecialchars($error) ?></div>
+		<?php endforeach; ?>
+	<?php endforeach; ?>
+<?php endif;
+?>
+
 <body>
 
 <div class="wrapper">
-	<form action="" class="login-form">
+	<form action="/register" class="login-form" method="post">
 		<h2>Регистрация</h2>
 		<input placeholder="Имя пользователя" type="text" name="username" class="login-form__input">
+		<input placeholder="Електронный адрес" type="email" name="email" class="login-form__input">
 		<input placeholder="Пароль" type="password" name="password" class="login-form__input">
-		<button type="submit" class="login-form__button">Войти</button>
+		<button type="submit" class="login-form__button">Регистрация</button>
 	</form>
 </div>
 
-<div class="warn success display-none">Вы успешно прошли регистрацию</div>
-<div class="warn error display-none">Такой пользователь уже есть</div>
-<div class="warn fatalerror display-none">Произошла какая-то ошибка!</div>
-
-</body>
-</html>
+<?php
+require BASE_PATH . '/views/layout/footer.php';
+?>
