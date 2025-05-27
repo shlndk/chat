@@ -36,6 +36,33 @@ body, html {
 	max-height: 88%;
 	overflow-y: auto;
 }
+.navbar{
+	background-color: var(--black);
+	color: var(--white);
+	padding: 10px 5px;
+	display: flex;
+	align-items: center;
+
+}
+
+.navbar a {
+	color: var(--white);
+	text-decoration: none;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+.navbar a:hover {
+	background-color: #555;
+}
+.welcome{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: calc(100vh - 150px);
+}
+
 .wrapper {
 	max-width: 1000px;
 	margin-right: auto;
@@ -126,6 +153,7 @@ body, html {
 .profile-left {
 	border-right: 2px var(--dark-grey) solid;
 	width: 30%;
+	overflow-y: auto;
 }
 
 .profile-right {
@@ -262,3 +290,5 @@ body, html {
 	margin-bottom: 15px;
 	border-radius: 4px;
 }
+
+

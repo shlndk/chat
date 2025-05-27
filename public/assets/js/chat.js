@@ -8,6 +8,14 @@ window.addEventListener('DOMContentLoaded', () => {
 			document.getElementById('chatBox').innerHTML = html;
 		});
 });
+document.querySelectorAll('.account').forEach(account => {
+	account.addEventListener('click', () => {
+		const accountId = account.dataset.accountId;
+		document.getElementById('receiverIdInput').value = accountId;
+		document.getElementById('sendButton').style.display = 'inline-block';
+		document.getElementById('messageInput').disabled = false;
+	});
+});
 document.getElementById('messageForm').addEventListener('submit', function (e) {
 	e.preventDefault();
 

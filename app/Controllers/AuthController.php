@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\Auth;
 use PixelFix\Framework\Controllers\AbstractController;
 use PixelFix\Framework\Database\Connection;
 use PixelFix\Framework\Http\Request;
@@ -80,7 +79,7 @@ class AuthController extends AbstractController
 
 			$result = $this->user->logout();
 
-			header('Location: /login');
+			header('Location: /home');
 			exit;
 		}else{
 			http_response_code(405);
@@ -88,7 +87,6 @@ class AuthController extends AbstractController
 
 
 	}
-
 
 
 }

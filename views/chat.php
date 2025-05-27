@@ -21,20 +21,22 @@ require BASE_PATH . '/views/layout/header.php';
 			<div id="chatBox">
 
 			</div>
-
-			<form id="messageForm" class="message-form" method="post">
-				<input type="hidden" name="receiver_id" id="receiverIdInput"
-					   value="<?= htmlspecialchars($_GET['user_id'] ?? '') ?>">
-				<input type="text" name="message" id="messageInput" class="message-form__input"
-					   placeholder="Введите сообщение">
-				<button type="submit" class="">Отправить</button>
-			</form>
+			<?php if (!isset($_GET['user_id'])): ?>
+			<?php else: ?>
+				<form id="messageForm" class="message-form" method="post">
+					<input type="hidden" name="receiver_id" id="receiverIdInput"
+						   value="<?= htmlspecialchars($_GET['user_id'] ?? '') ?>">
+					<input type="text" name="message" id="messageInput" class="message-form__input"
+						   placeholder="Введите сообщение">
+					<button type="submit">Отправить</button>
+				</form>
+			<?php endif; ?>
 
 		</div>
 	</div>
 </div>
 
-	<script src='/assets/js/chat.js'></script>
+<script src='/assets/js/chat.js'></script>
 
 <?php
 require BASE_PATH . '/views/layout/footer.php';
